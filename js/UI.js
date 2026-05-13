@@ -1,4 +1,5 @@
 export class UI {
+
     #contenedor;
 
     constructor(contenedorId) {
@@ -6,27 +7,40 @@ export class UI {
     }
 
     mostrarProductos(productos) {
+
         if (productos.length === 0) {
-            this.#contenedor.innerHTML = "<p>No se encontraron productos</p>";
+            this.#contenedor.innerHTML = `
+                <p>No se encontraron productos</p>
+            `;
             return;
         }
 
         this.#contenedor.innerHTML = productos
-            .map(p => this.#crearCard(p))
+            .map(producto => this.#crearCard(producto))
             .join("");
     }
 
     mostrarError(mensaje) {
-        this.#contenedor.innerHTML = `<p class="error">${mensaje}</p>`;
+        this.#contenedor.innerHTML = `
+            <p class="error">${mensaje}</p>
+        `;
     }
 
     #crearCard(producto) {
+
         return `
-        <div class="card">
-            <img src="${producto.thumbnail}" alt="${producto.title}">
-            <h2>${producto.title}</h2>
-            <p class="precio">$${producto.price}</p>
-            <p class="descripcion">${producto.description}</p>
-        </div>`;
+            <div class="card">
+
+                <img src="${producto.thumbnail}" alt="${producto.title}">
+
+                <h2>${producto.title}</h2>
+
+                <p class="precio">$${producto.price}</p>
+
+                <p class="descripcion">${producto.description}</p>
+
+            </div>
+        `;
     }
+
 }

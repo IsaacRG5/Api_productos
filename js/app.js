@@ -1,60 +1,95 @@
-import { ProductoAPI } from "./ProductoAPI.js";
 import { UI } from "./UI.js";
 
-// --- Instancias ---
-const api = new ProductoAPI(12);
 const ui = new UI("contenedor");
 
-// --- Estado ---
-let pagina = 1;
-let buscando = false;
-
-// --- Elementos del DOM ---
 const btnSiguiente = document.getElementById("siguiente");
 const btnAnterior = document.getElementById("anterior");
+
 const inputBuscar = document.getElementById("buscar");
 
-// --- Funciones principales ---
-async function cargarPagina() {
+let pagina = 1;
+
+const limit = 12;
+
+async function obtenerProductos() {
+
+    const skip = (pagina - 1) * limit;
+
+    const url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+
     try {
-        const productos = await api.obtenerPorPagina(pagina);
-        ui.mostrarProductos(productos);
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        ui.mostrarProductos(data.products);
+
     } catch (error) {
-        ui.mostrarError("Error al cargar los productos.");
-        console.error(error);
+
+        console.log(error);
+
+        ui.mostrarError("Error al cargar productos");
+
     }
+
 }
 
-async function buscar(texto) {
+async function buscarProductos(texto) {
+
     if (texto.trim() === "") {
-        buscando = false;
-        cargarPagina();
+
+        obtenerProductos();
+
         return;
     }
-    buscando = true;
+
+    const url = `https://dummyjson.com/products/search?q=${texto}`;
+
     try {
-        const productos = await api.buscar(texto);
-        ui.mostrarProductos(productos);
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        ui.mostrarProductos(data.products);
+
     } catch (error) {
-        ui.mostrarError("Error al buscar productos.");
-        console.error(error);
+
+        console.log(error);
+
+        ui.mostrarError("Error al buscar productos");
+
     }
+
 }
 
-// --- Eventos ---
-inputBuscar.addEventListener("input", (e) => buscar(e.target.value));
+inputBuscar.addEventListener("input", (e) => {
+
+    const texto = e.target.value;
+
+    buscarProductos(texto);
+
+});
 
 btnSiguiente.addEventListener("click", () => {
-    if (buscando) return; // no paginar durante búsqueda
+
     pagina++;
-    cargarPagina();
+
+    obtenerProductos();
+
 });
 
 btnAnterior.addEventListener("click", () => {
-    if (buscando || pagina <= 1) return;
-    pagina--;
-    cargarPagina();
+
+    if (pagina > 1) {
+
+        pagina--;
+
+        obtenerProductos();
+
+    }
+
 });
 
-// --- Inicio ---
-cargarPagina();
+obtenerProductos();

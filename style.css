@@ -1,43 +1,119 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    background-color: #f5f5f5;
+    margin: 0;
+    background: linear-gradient(to bottom, #f4f7fb, #e9eef5);
     text-align: center;
+    color: #333;
 }
 
+/* HEADER */
+header{
+    margin: 0;
+    background: linear-gradient(135deg, #00c9a7, #00b4d8);
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+header h1{
+    margin: 0;
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+header input{
+    width: 280px;
+    height: 35px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: 0 15px;
+    outline: none;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* CONTENEDOR */
 #contenedor{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+    gap: 55px;
+    padding: 30px;
+    justify-items: center;
 }
 
+/* TARJETAS */
 .card{
-    background: white;
+    background: #ffffff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow:o o 5px #00000033;
-    margin: 20px;
-    width: 200px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    width: 280px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+
 }
 
 .card:hover{
-    transform: scale(1.1);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
 }
+
+
+h2{
+    font-family: 'Courier New', Courier, monospace;
+    color: #0077b6;
+    margin-bottom: 10px;
+}
+
+
+.descripcion{
+    display: flex;
+    text-align: start;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #555;
+    line-height: 1.5;
+}
+
 
 img{
     width: 100%;
-
+    height: 180px;
+    border-radius: 12px;
     object-fit: cover;
+    border: 3px solid #eef2f7;
+    transition: transform 0.3s ease;
 }
+
+.card:hover img{
+    transform: scale(1.05);
+}
+
 
 .botones{
     margin-top: 20px;
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
 }
-button{
-    padding: 10px, 20px;
-    cursor: pointer;
 
+button{
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background: linear-gradient(135deg, #0077b6, #023e8a);
+    transform: scale(1.05);
 }

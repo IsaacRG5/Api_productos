@@ -16,9 +16,9 @@ export class UI {
         }
 
         this.#contenedor.innerHTML = productos
-            .map(producto => this.#crearCard(producto))
+            .map(producto => this.#crearCard(producto)) //[p1, p2...p12] -> crea una card
             .join("");
-    }
+    }       
 
     mostrarError(mensaje) {
         this.#contenedor.innerHTML = `
